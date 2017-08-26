@@ -3,11 +3,12 @@
 # Exit on first error
 set -e
 
-#gcc with c++-14 support
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+sudo add-apt-repository -y ppa:beineri/opt-qt591-trusty
 sudo apt-get update -qq
 
-sudo apt-get install -qq g++-5
+#gcc with c++-14 support and Qt 5.9
+sudo apt-get install -qq g++-5 qt59-meta
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
 
 # modern cmake version
@@ -23,8 +24,3 @@ wget --quiet $CMAKE_URL
 mkdir -p $CMAKE_DIR
 tar --strip-components=1 -xzf $CMAKE_TAR -C $CMAKE_DIR
 export PATH=$CMAKE_DIR/bin:$PATH
-
-# Qt 5.9
-sudo add-apt-repository -y ppa:beineri/opt-qt591-trusty
-sudo apt-get update -qq
-sudo apt-get -qy install qt59-meta
