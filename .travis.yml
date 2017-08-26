@@ -9,11 +9,11 @@ os:
 
 compiler:
     - gcc
-    - clang
+#    - clang
 
 env:
     - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug
-    - TARGET_CPU=amd64 BUILD_CONFIGURATION=Release
+#    - TARGET_CPU=amd64 BUILD_CONFIGURATION=Release
 #    - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
 #    - TARGET_CPU=x86 BUILD_CONFIGURATION=Release
 
@@ -34,6 +34,7 @@ install:
 script:
     - mkdir build
     - cd build
+    - . /opt/qt59/bin/qt59-env.sh
     - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU
-    - cmake --build .
+    - cmake --build . --target all
 #    - ctest --output-on-failure

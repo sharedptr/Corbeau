@@ -24,3 +24,6 @@ mkdir -p $CMAKE_DIR
 tar --strip-components=1 -xzf $CMAKE_TAR -C $CMAKE_DIR
 export PATH=$CMAKE_DIR/bin:$PATH
 
+# Qt 5.9
+sudo add-apt-repository -y ppa:beineri/opt-qt591-trusty
+sudo apt-get -qy install qt59-meta
