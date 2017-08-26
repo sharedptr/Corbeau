@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include "corbeau-config.h"
+
 #include "documenthandler.h"
 
 int main( int argc, char* argv[] )
@@ -8,7 +10,8 @@ int main( int argc, char* argv[] )
     QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling );
     QGuiApplication app( argc, argv );
 
-    qmlRegisterType< DocumentHandler >( "org.Qotes", 1, 0, "DocumentHandler" );
+    qmlRegisterType< DocumentHandler >( CORBEAU_NAME, CORBEAU_PLUGIN_VERSION_MAJOR, CORBEAU_PLUGIN_VERSION_MINOR,
+                                        "DocumentHandler" );
 
     QQmlApplicationEngine engine;
     engine.addImportPath( ( QLatin1String( "qrc:///" ) ) );

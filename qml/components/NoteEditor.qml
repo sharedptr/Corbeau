@@ -6,7 +6,7 @@ import Qt.labs.platform 1.0
 
 import 'NotesEditor'
 
-import org.Qotes 1.0
+import Corbeau 1.0
 
 Item {
     id: root

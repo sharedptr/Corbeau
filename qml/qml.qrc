@@ -13,7 +13,6 @@
         <file>images/fileopen.png</file>
         <file>images/fileprint.png</file>
         <file>images/filesave.png</file>
-        <file>images/qt-logo.png</file>
         <file>images/zoomin.png</file>
         <file>images/zoomout.png</file>
         <file>ui/ToolBarSeparator.qml</file>
