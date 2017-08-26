@@ -26,4 +26,5 @@ export PATH=$CMAKE_DIR/bin:$PATH
 
 # Qt 5.9
 sudo add-apt-repository -y ppa:beineri/opt-qt591-trusty
+sudo apt-get update -qq
 sudo apt-get -qy install qt59-meta
