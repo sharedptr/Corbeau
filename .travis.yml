@@ -34,7 +34,7 @@ install:
 script:
     - mkdir build
     - cd build
-    - . /opt/qt59/bin/qt59-env.sh
-    - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU
-    - cmake --build . --target all
+    - source /opt/qt59/bin/qt59-env.sh
+    - $CMAKE_DIR/bin/cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU
+    - $CMAKE_DIR/bin/cmake --build . --target all
 #    - ctest --output-on-failure
