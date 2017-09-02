@@ -19,6 +19,13 @@ set( CMAKE_AUTORCC ON )
 set( CMAKE_CXX_VISIBILITY_PRESET hidden )
 set( CMAKE_VISIBILITY_INLINES_HIDDEN hidden )
 
+list( INSERT CMAKE_MODULE_PATH 0
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/3rdparty
+    )
+
+include( 3rdparty )
+
 option( CORBEAU_ENABLE_CLANG_TIDY "Enable clang-tidy utils" OFF )
 
 if( CORBEAU_ENABLE_CLANG_TIDY )
