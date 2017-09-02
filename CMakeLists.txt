@@ -24,6 +24,8 @@ option( CORBEAU_ENABLE_CLANG_TIDY "Enable clang-tidy utils" OFF )
 if( CORBEAU_ENABLE_CLANG_TIDY )
     # TODO: need find clang-tidy command
     set( CMAKE_CXX_CLANG_TIDY "C:/LLVM/bin/clang-tidy.exe" )
+else()
+    set( CMAKE_CXX_CLANG_TIDY )
 endif()
 
 configure_file( corbeau-config.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/corbeau-config.h @ONLY )
