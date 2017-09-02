@@ -17,7 +17,7 @@
         <file>images/zoomout.png</file>
         <file>ui/ToolBarSeparator.qml</file>
         <file>example.html</file>
-        <file>components/NoteEditor.qml</file>
+        <file>components/NotesEditor.qml</file>
         <file>ui/Content.qml</file>
         <file>components/NotesEditor/CheckedToolButton.qml</file>
         <file>images/NotesEditor/textbold.png</file>
@@ -27,5 +27,7 @@
         <file>images/NotesEditor/textleft.png</file>
         <file>images/NotesEditor/textright.png</file>
         <file>images/NotesEditor/textunder.png</file>
+        <file>components/NoteBooksView.qml</file>
+        <file>components/NoteBooksView/NoteBookView.qml</file>
     </qresource>
 </RCC>

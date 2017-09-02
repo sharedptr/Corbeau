@@ -1,17 +1,30 @@
+#include "corbeau-config.h"
+
+#include "data/notebooksmodel.h"
+#include "data/notesmodel.h"
+#include "documenthandler.h"
+
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-#include "corbeau-config.h"
+namespace {
 
-#include "documenthandler.h"
+template < typename T >
+inline int registerType( const char* qmlName )
+{
+    return qmlRegisterType< T >( CORBEAU_NAME, CORBEAU_PLUGIN_VERSION_MAJOR, CORBEAU_PLUGIN_VERSION_MINOR, qmlName );
+}
+
+} // namespace
 
 int main( int argc, char* argv[] )
 {
     QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling );
     QGuiApplication app( argc, argv );
 
-    qmlRegisterType< DocumentHandler >( CORBEAU_NAME, CORBEAU_PLUGIN_VERSION_MAJOR, CORBEAU_PLUGIN_VERSION_MINOR,
-                                        "DocumentHandler" );
+    registerType< DocumentHandler >( "DocumentHandler" );
+    registerType< corbeau::data::NoteBooksModel >( "NoteBooksModel" );
+    registerType< corbeau::data::NotesModel >( "NotesModel" );
 
     QQmlApplicationEngine engine;
     engine.addImportPath( ( QLatin1String( "qrc:///" ) ) );

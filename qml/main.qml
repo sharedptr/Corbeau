@@ -8,7 +8,7 @@ ApplicationWindow {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Unnamed application")
+    title: qsTr("Corbeau")
 
     header: Label {
         id: mainMenu
@@ -25,7 +25,6 @@ ApplicationWindow {
 
     Content {
         id: content
-
         anchors.fill: parent
     }
 

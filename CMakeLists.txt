@@ -28,11 +28,16 @@ endif()
 
 configure_file( corbeau-config.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/corbeau-config.h @ONLY )
 
-find_package( Qt5 COMPONENTS Core Quick REQUIRED )
+find_package( Qt5 COMPONENTS Core Quick Qml REQUIRED )
 
 set( SOURCES
     src/documenthandler.cpp
     src/main.cpp
+    src/data/note.cpp
+    src/data/notebook.cpp
+    src/data/notebooksmodel.cpp
+    src/data/notesmodel.cpp
+    src/data/notetreenode.cpp
     )
 
 set( RESOURCES
@@ -49,7 +54,7 @@ target_include_directories( ${PROJECT_NAME} PUBLIC
     src
     )
 
-target_link_libraries( ${PROJECT_NAME} Qt5::Core Qt5::Quick )
+target_link_libraries( ${PROJECT_NAME} Qt5::Core Qt5::Quick Qt5::Qml )
 
 set( CPACK_PACKAGE_NAME "${PROJECT_NAME}" )
 set( CPACK_PACKAGE_DESCRIPTION_SUMMARY "MyPackage Installation Example" )

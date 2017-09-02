@@ -1,6 +1,9 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import QtQml.Models 2.2
+
+import Corbeau 1.0
 
 import 'qrc:///components'
 
@@ -12,68 +15,39 @@ Item {
 
         anchors.fill: parent
 
-        ColumnLayout {
-            id: pickMenu
-
-            Layout.minimumWidth: 50
-            Layout.preferredWidth: 100
-
-            Text {
-                id: text1
-                text: qsTr("Text 1")
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                font.pixelSize: 12
-            }
-
-            Text {
-                id: text2
-                text: qsTr("Text 2")
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                font.pixelSize: 12
-            }
-
-            Text {
-                id: text3
-                text: qsTr("Text 3")
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                font.pixelSize: 12
-            }
-
-            Item {
-                Layout.fillHeight: true
-            }
-        }
-
-        ColumnLayout {
-            id: notesMenu
-
+        NoteBooksView {
+            id: noteBooksView
             Layout.minimumWidth: 100
             Layout.preferredWidth: 150
 
-            Text {
-                text: qsTr("Note 1")
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                font.pixelSize: 12
+            Layout.fillHeight: true
+            currentIndex: noteBooksModel.currentIndex
+
+            model: NoteBooksModel {
+                id: noteBooksModel
             }
 
-            Text {
-                text: qsTr("Note 2")
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                font.pixelSize: 12
-            }
-
-            Text {
-                text: qsTr("Note 3")
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                font.pixelSize: 12
-            }
-
-            Item {
-                Layout.fillHeight: true
-            }
+            onItemSelected: noteBooksModel.currentIndex = index
         }
 
-        NoteEditor {
+        NoteBooksView {
+            id: notesView
+            Layout.minimumWidth: 100
+            Layout.preferredWidth: 150
+
+            Layout.fillHeight: true
+            currentIndex: notesModel.currentIndex
+
+            model: NotesModel {
+                id: notesModel
+                sourceModel: noteBooksModel
+                bookIndex: noteBooksModel.currentIndex
+            }
+
+            onItemSelected: notesModel.currentIndex = index
+        }
+
+        NotesEditor {
             id: editor
             Layout.fillHeight: true
             Layout.fillWidth: true
