@@ -8,7 +8,7 @@ sudo add-apt-repository -y ppa:beineri/opt-qt591-trusty
 sudo apt-get update -qq
 
 #gcc with c++-14 support and Qt 5.9
-sudo apt-get install -qq g++-5 qt59base qt59quickcontrols qt59quickcontrols2
+sudo apt-get install -qq g++-5 qt59base qt59quickcontrols qt59quickcontrols2 qt59declarative
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
 
 # modern cmake version
