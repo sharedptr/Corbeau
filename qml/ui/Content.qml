@@ -47,11 +47,9 @@ Item {
             onItemSelected: notesModel.currentIndex = index
         }
 
-        NotesEditor {
-            id: editor
+        Item {
             Layout.fillHeight: true
             Layout.fillWidth: true
         }
-
     }
 }

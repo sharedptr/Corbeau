@@ -16,10 +16,7 @@
         <file>images/zoomin.png</file>
         <file>images/zoomout.png</file>
         <file>ui/ToolBarSeparator.qml</file>
-        <file>example.html</file>
-        <file>components/NotesEditor.qml</file>
         <file>ui/Content.qml</file>
-        <file>components/NotesEditor/CheckedToolButton.qml</file>
         <file>images/NotesEditor/textbold.png</file>
         <file>images/NotesEditor/textcenter.png</file>
         <file>images/NotesEditor/textitalic.png</file>

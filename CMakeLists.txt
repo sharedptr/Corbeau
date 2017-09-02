@@ -33,7 +33,6 @@ configure_file( corbeau-config.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/corbeau-
 find_package( Qt5 COMPONENTS Core Quick Qml REQUIRED )
 
 set( SOURCES
-    src/documenthandler.cpp
     src/main.cpp
     src/data/note.cpp
     src/data/notebook.cpp
