@@ -1,5 +1,5 @@
 ---
-Checks:          'clang-diagnostic-*,clang-analyzer-*,readability-*,performance-*,cppcoreguidelines-*,google-*,misc-*,-readability-redundant-member-init,-readability-implicit-bool-cast,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-google-runtime-references,-google-readability-todo,-cppcoreguidelines-pro-type-vararg,-cppcoreguidelines-pro-bounds-constant-array-index'
+Checks:          'clang-diagnostic-*,clang-analyzer-*,readability-*,performance-*,cppcoreguidelines-*,google-*,misc-*,modernize-*'
 WarningsAsErrors: ''
 HeaderFilterRegex: ''
 AnalyzeTemporaryDtors: false
@@ -82,7 +82,7 @@ CheckOptions:
   - key:             modernize-replace-auto-ptr.IncludeStyle
     value:           llvm
   - key:             modernize-use-nullptr.NullMacros
-    value:           'NULL'
+    value:           'nullptr'
   - key:             performance-faster-string-find.StringLikeClasses
     value:           'std::basic_string'
   - key:             performance-for-range-copy.WarnOnAllAutoCopies

@@ -2,7 +2,8 @@ cmake_minimum_required( VERSION 3.6 )
 
 project( Corbeau
     VERSION 0.0.1
-    LANGUAGES CXX )
+    LANGUAGES CXX
+    )
 
 set( CORBEAU_PLUGIN_VERSION_MAJOR 1 )
 set( CORBEAU_PLUGIN_VERSION_MINOR 0 )
@@ -15,24 +16,38 @@ set( CMAKE_INCLUDE_CURRENT_DIR ON )
 set( CMAKE_AUTOMOC ON )
 set( CMAKE_AUTORCC ON )
 
-configure_file( corbeau-config.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/corbeau-config.h @ONLY )
+set( CMAKE_CXX_VISIBILITY_PRESET hidden )
+set( CMAKE_VISIBILITY_INLINES_HIDDEN hidden )
 
-include_directories( BEFORE ${CMAKE_CURRENT_BINARY_DIR}/include )
+option( CORBEAU_ENABLE_CLANG_TIDY "Enable clang-tidy utils" OFF )
+
+if( CORBEAU_ENABLE_CLANG_TIDY )
+    # TODO: need find clang-tidy command
+    set( CMAKE_CXX_CLANG_TIDY "C:/LLVM/bin/clang-tidy.exe" )
+endif()
+
+configure_file( corbeau-config.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/corbeau-config.h @ONLY )
 
 find_package( Qt5 COMPONENTS Core Quick REQUIRED )
 
 set( SOURCES
     src/documenthandler.cpp
-    src/main.cpp )
+    src/main.cpp
+    )
 
 set( RESOURCES
-    qml/qml.qrc )
+    qml/qml.qrc
+    )
 
 add_executable( ${PROJECT_NAME}
     ${SOURCES}
-    ${RESOURCES} )
+    ${RESOURCES}
+    )
 
-target_include_directories( ${PROJECT_NAME} PUBLIC  src )
+target_include_directories( ${PROJECT_NAME} PUBLIC
+    ${CMAKE_CURRENT_BINARY_DIR}/include
+    src
+    )
 
 target_link_libraries( ${PROJECT_NAME} Qt5::Core Qt5::Quick )
 
