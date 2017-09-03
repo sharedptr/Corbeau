@@ -42,6 +42,7 @@ endif()
 configure_file( corbeau-config.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/corbeau-config.h @ONLY )
 
 find_package( Qt5 COMPONENTS Core Quick Qml REQUIRED )
+find_package( Threads REQUIRED )
 
 add_subdirectory( corbeau-log )
 

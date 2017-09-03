@@ -26,9 +26,13 @@ target_include_directories( ${PROJECT_NAME} BEFORE
     ${PROJECT_SOURCE_DIR}/src
     )
 
-target_link_libraries( ${PROJECT_NAME}
+target_link_libraries( ${PROJECT_NAME} PRIVATE
     Qt5::Core
     spdlog::spdlog
+    )
+
+target_link_libraries( ${PROJECT_NAME} PUBLIC
+    ${CMAKE_THREAD_LIBS_INIT}
     )
 
 include( GenerateExportHeader )
