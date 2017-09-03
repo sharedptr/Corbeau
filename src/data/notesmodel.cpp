@@ -3,8 +3,11 @@
 #include "data/notebooksmodel.h"
 #include "data/notetreenode.h"
 
+#include <corbeau-log-category.h>
+
 namespace corbeau {
 namespace data {
+CRBL_CREATE_CAT_CLASS( NotesModel, data )
 
 NotesModel::NotesModel( QObject* parent )
     : QAbstractProxyModel( parent )
@@ -96,6 +99,7 @@ void NotesModel::setCurrentIndex( int currentIndex )
         return;
     }
 
+    CRBDebug( NotesModel ) << "Current index changing" << m_CurrentIndex << "->" << currentIndex;
     m_CurrentIndex = currentIndex;
     emit currentIndexChanged( m_CurrentIndex );
 }
@@ -108,6 +112,7 @@ void NotesModel::setBookIndex( int bookIndex )
     }
 
     beginResetModel();
+    CRBDebug( NotesModel ) << "NoteBook index changing" << m_BookIndex << "->" << bookIndex;
     m_BookIndex = bookIndex;
     m_CurrentBook = m_BooksModel->getItem( QModelIndex() )->child( m_BookIndex );
     endResetModel();
