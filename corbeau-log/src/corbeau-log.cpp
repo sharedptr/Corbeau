@@ -4,6 +4,8 @@
 
 #include <QDir>
 #include <QMessageLogContext>
+#include <QMutex>
+#include <QMutexLocker>
 #include <QSettings>
 #include <QString>
 #include <QTextStream>
@@ -64,10 +66,12 @@ inline spdlog::level::level_enum getLevel( QtMsgType type )
 
 void messageHandler( QtMsgType type, const QMessageLogContext& context, const QString& message )
 {
+    static QMutex mutex;
+    QMutexLocker lock( &mutex );
+    Q_UNUSED( lock );
+
     QString result;
-    {
-        QTextStream( &result ) << "[" << messageTypeStr( type ) << "]\t[" << context.category << "]\t" << message;
-    }
+    QTextStream( &result ) << "[" << messageTypeStr( type ) << "]\t[" << context.category << "]\t" << message;
 
     spdlog::apply_all(
         [&]( std::shared_ptr< spdlog::logger > logger ) { logger->log( getLevel( type ), result.toStdString() ); } );
