@@ -28,9 +28,12 @@ ExternalProject_Add(
     INSTALL_DIR "${CBO_3RDPARTY_INSTALL_DIR}"
     )
 
-add_library( spdlog UNKNOWN IMPORTED )
-set_property(TARGET spdlog PROPERTY INTERFACE_INCLUDE_DIRECTORIES
-    "${CBO_3RDPARTY_INCLUDE_DIR}"
+# Create imported target spdlog::spdlog
+add_library( spdlog::spdlog INTERFACE IMPORTED )
+
+set_target_properties( spdlog::spdlog PROPERTIES
+    INTERFACE_INCLUDE_DIRECTORIES "${CBO_3RDPARTY_INCLUDE_DIR}"
     )
-add_dependencies( spdlog ep-spdlog )
+
+add_dependencies( spdlog::spdlog ep-spdlog )
 

@@ -1,9 +1,12 @@
 cmake_minimum_required( VERSION 3.6 )
 
-project( Corbeau
+project( corbeau
     VERSION 0.0.1
     LANGUAGES CXX
     )
+
+set( CORBEAU_NAME "Corbeau" )
+set( CORBEAU_VERSION ${PROJECT_VERSION} )
 
 set( CORBEAU_PLUGIN_VERSION_MAJOR 1 )
 set( CORBEAU_PLUGIN_VERSION_MINOR 0 )
@@ -27,6 +30,7 @@ list( INSERT CMAKE_MODULE_PATH 0
 include( 3rdparty )
 
 option( CORBEAU_ENABLE_CLANG_TIDY "Enable clang-tidy utils" OFF )
+option( CORBEAU_ENABLE_COLOR_LOG "Enable clolor console output" ON )
 
 if( CORBEAU_ENABLE_CLANG_TIDY )
     # TODO: need find clang-tidy command
@@ -38,6 +42,8 @@ endif()
 configure_file( corbeau-config.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/corbeau-config.h @ONLY )
 
 find_package( Qt5 COMPONENTS Core Quick Qml REQUIRED )
+
+add_subdirectory( corbeau-log )
 
 set( SOURCES
     src/main.cpp
@@ -58,11 +64,16 @@ add_executable( ${PROJECT_NAME}
     )
 
 target_include_directories( ${PROJECT_NAME} PUBLIC
-    ${CMAKE_CURRENT_BINARY_DIR}/include
+    ${CMAKE_BINARY_DIR}/include
     src
     )
 
-target_link_libraries( ${PROJECT_NAME} Qt5::Core Qt5::Quick Qt5::Qml )
+target_link_libraries( ${PROJECT_NAME}
+    corbeau-log
+    Qt5::Core
+    Qt5::Quick
+    Qt5::Qml
+)
 
 set( CPACK_PACKAGE_NAME "${PROJECT_NAME}" )
 set( CPACK_PACKAGE_DESCRIPTION_SUMMARY "MyPackage Installation Example" )

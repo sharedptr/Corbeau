@@ -3,14 +3,23 @@
 #include "data/notebooksmodel.h"
 #include "data/notesmodel.h"
 
+#include <corbeau-log.h>
+
+#include <QDebug>
 #include <QGuiApplication>
+#include <QLoggingCategory>
 #include <QQmlApplicationEngine>
+#include <QSettings>
+#include <QStandardPaths>
 
 namespace {
+Q_DECLARE_LOGGING_CATEGORY( crbApp );
+Q_LOGGING_CATEGORY( crbApp, CORBEAU_NAME ".app" );
 
 template < typename T >
 inline int registerType( const char* qmlName )
 {
+    qCDebug( crbApp ) << "Register type with name:" << qmlName;
     return qmlRegisterType< T >( CORBEAU_NAME, CORBEAU_PLUGIN_VERSION_MAJOR, CORBEAU_PLUGIN_VERSION_MINOR, qmlName );
 }
 
@@ -19,7 +28,21 @@ inline int registerType( const char* qmlName )
 int main( int argc, char* argv[] )
 {
     QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling );
+    QCoreApplication::setOrganizationName( QLatin1String( CORBEAU_NAME ) );
+    QCoreApplication::setApplicationName( QLatin1String( CORBEAU_NAME ) );
+    QCoreApplication::setApplicationVersion( QLatin1String( CORBEAU_VERSION_STR ) );
+
     QGuiApplication app( argc, argv );
+
+    {
+        const QSettings appSettings( QSettings::IniFormat, QSettings::UserScope, app.organizationName(),
+                                     app.applicationName() );
+        corbeau::log::init( appSettings, QStandardPaths::writableLocation( QStandardPaths::AppLocalDataLocation ) );
+
+        app.connect( &app, QCoreApplication::aboutToQuit, corbeau::log::finalize );
+    }
+
+    qCInfo( crbApp ) << "Start application: " << app.applicationName() << app.applicationVersion();
 
     registerType< corbeau::data::NoteBooksModel >( "NoteBooksModel" );
     registerType< corbeau::data::NotesModel >( "NotesModel" );
