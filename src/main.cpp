@@ -38,7 +38,7 @@ int main( int argc, char* argv[] )
                                      app.applicationName() );
         corbeau::log::init( appSettings, QStandardPaths::writableLocation( QStandardPaths::AppLocalDataLocation ) );
 
-        app.connect( &app, QCoreApplication::aboutToQuit, corbeau::log::finalize );
+        app.connect( &app, &QCoreApplication::aboutToQuit, corbeau::log::finalize );
     }
 
     CRBInfo( app ) << "Start application:" << app.applicationName() << app.applicationVersion();
