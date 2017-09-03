@@ -2,8 +2,11 @@
 
 #include "data/notetreenode.h"
 
+#include <corbeau-log-category.h>
+
 namespace corbeau {
 namespace data {
+CRBL_CREATE_CAT_CLASS( NoteBooksModel, data )
 
 NoteBooksModel::NoteBooksModel( QObject* parent )
     : QAbstractItemModel( parent )
@@ -124,6 +127,7 @@ void NoteBooksModel::setCurrentIndex( int currentIndex )
         return;
     }
 
+    CRBDebug( NoteBooksModel ) << "Current index changing" << m_CurrentIndex << "->" << currentIndex;
     m_CurrentIndex = currentIndex;
     emit currentIndexChanged( m_CurrentIndex );
 }

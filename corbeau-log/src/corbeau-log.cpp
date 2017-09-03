@@ -1,5 +1,7 @@
 #include "corbeau-log.h"
 
+#include "corbeau-log-category.h"
+
 #include <QDir>
 #include <QMessageLogContext>
 #include <QSettings>
@@ -13,6 +15,7 @@
 
 namespace corbeau {
 namespace log {
+CRBL_CREATE_CAT( log )
 
 namespace {
 inline const QLatin1String& messageTypeStr( QtMsgType type )
@@ -63,7 +66,7 @@ void messageHandler( QtMsgType type, const QMessageLogContext& context, const QS
 {
     QString result;
     {
-        QTextStream( &result ) << "[" << context.category << "] [" << messageTypeStr( type ) << "] " << message;
+        QTextStream( &result ) << "[" << messageTypeStr( type ) << "]\t[" << context.category << "]\t" << message;
     }
 
     spdlog::apply_all(
@@ -88,10 +91,13 @@ void init( const QSettings& settings, const QString& logsDirectory )
     Q_UNUSED( settings )
     Q_UNUSED( logsDir )
     qInstallMessageHandler( messageHandler );
+
+    CRBInfo( log ) << "init logging";
 }
 
 void finalize()
 {
+    CRBInfo( log ) << "finalize logging";
     qInstallMessageHandler( nullptr );
     spdlog::drop_all();
 }

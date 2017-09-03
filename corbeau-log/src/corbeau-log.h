@@ -2,7 +2,6 @@
 #ifndef CORBEAU_CORBEAULOG_H_
 #define CORBEAU_CORBEAULOG_H_
 
-#include "corbeau-config.h"
 #include "corbeau-log-export.h"
 
 class QString;
